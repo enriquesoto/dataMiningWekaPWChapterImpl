@@ -23,8 +23,6 @@ public class UsuarioControllerTest {
 	@Test
 	public void testValidateLogin() {
 		//fail("Not yet implemented");
-		String username = "20080561";
-		String password = "20080561";
 		UsuarioController myUserController = new UsuarioController();
 		myUserController.setDni(username);
 		myUserController.setPassword(password);

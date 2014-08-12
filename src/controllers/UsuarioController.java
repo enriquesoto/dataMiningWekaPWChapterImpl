@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import main.Connect;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -11,6 +13,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 import tools.MD5Encryption;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import dao.UsuarioDao;
@@ -32,6 +35,10 @@ public class UsuarioController extends ActionSupport implements SessionAware  {
 		//System.out.println("salida:" + dni +"-" +password);
 		
 		if(UsuarioDao.validate(dni, password)){
+			
+			session.put("loggined",true);
+			session.put("username",20080561);
+			
 			return SUCCESS;
 		}
 		return ERROR;

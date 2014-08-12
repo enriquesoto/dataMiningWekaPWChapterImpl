@@ -1,0 +1,32 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from HelloService WSDL service -->
+
+  <service name="Hello" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://probando"/>
+      <parameter name="wsdlServiceElement" value="HelloService"/>
+      <parameter name="schemaQualified" value="http://probando"/>
+      <parameter name="wsdlServicePort" value="Hello"/>
+      <parameter name="className" value="probando.HelloSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="Hello"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="hola" qname="operNS:hola" xmlns:operNS="http://probando" returnQName="retNS:holaReturn" xmlns:retNS="http://probando" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:nombre" xmlns:pns="http://probando" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="main" qname="operNS:main" xmlns:operNS="http://probando" soapAction="" >
+        <parameter qname="pns:args" xmlns:pns="http://probando" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="hola main"/>
+
+  </service>
+</deployment>

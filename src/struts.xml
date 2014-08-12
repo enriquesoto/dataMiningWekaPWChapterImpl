@@ -7,13 +7,13 @@
 	<package name="Login" extends="struts-default">
 		<action name="loginUserAction" class="controllers.UsuarioController"
 			method="validateLogin">
-			<result name="success">/welcome.jsp</result>
+			<result name="success">/welcome-user.jsp</result>
 			<result name="error">/index.jsp</result>
 		</action>
 		
 		<action name="notasParcialesAction" class="controllers.NotasController"
 			method="misNotasParciales">
-			<result name="success">/welcome.jsp</result>
+			<result name="success">/notasParciales.jsp</result>
 			<result name="error">/index.jsp</result>
 		</action>
 		

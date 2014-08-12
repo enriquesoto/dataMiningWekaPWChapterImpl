@@ -15,14 +15,13 @@ public class NotasControllerTest {
 	
 	@Before 
 	public void setUp(){
-		notasExpected.add(20.0);notasExpected.add(19.0);
+		notasExpected.add(20.0);notasExpected.add(20.0);
 		notasExpected.add(20.0);notasExpected.add(20.0);
 	}
 	
-	@Test(timeout=2000)
+	@Test(timeout=3000)
 	public void tesMisNotasParciales() {
 		//fail("Not yet implemented");
-		
 		
 		NotasController aNotasController = new NotasController();
 		

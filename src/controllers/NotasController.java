@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -31,8 +32,15 @@ public class NotasController extends ActionSupport implements SessionAware {
 	
 	private  Map<String, Object> session;
 	private String username;
-	public ArrayList<Double> notas = new ArrayList<Double>();
+	public List<Double> notas;
 	
+	
+	public List<Double> getNotas() {
+		return notas;
+	}
+	public void setNotas(List<Double> notas) {
+		this.notas = notas;
+	}
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
@@ -53,6 +61,7 @@ public class NotasController extends ActionSupport implements SessionAware {
 		    
 		    ArrayList<String> cabecera = new ArrayList<String>();
 		    
+		    notas = new ArrayList<Double>();
 		    
 		    for(int i=0; i<colsArray.length();i++ ){
 		    	

@@ -1,6 +1,13 @@
 package controllers;
 
 import java.io.BufferedReader;
+
+import weka.classifiers.functions.LinearRegression;
+import weka.core.Instance;
+import weka.core.Instances;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,8 +40,22 @@ public class NotasController extends ActionSupport implements SessionAware {
 	private  Map<String, Object> session;
 	private String username;
 	public List<Double> notas;
+	public Double grade;
+	public Instance Curso;
 	
 	
+	public Instance getCurso() {
+		return Curso;
+	}
+	public void setCurso(Instance curso) {
+		Curso = curso;
+	}
+	public Double getGrade() {
+		return grade;
+	}
+	public void setGrade(Double grade) {
+		this.grade = grade;
+	}
 	public List<Double> getNotas() {
 		return notas;
 	}
@@ -48,44 +69,41 @@ public class NotasController extends ActionSupport implements SessionAware {
 	public String misNotasParciales(){
 		
 		try {
-			JSONObject json = readJsonFromUrl("https://spreadsheets.google.com/tq?&tq=select%20D%2CE%2CF%2CG%20"
-					+ "where%20B%3D"+username+"&key=0AvfPOhmLXt8tdGFoQnZXNXVGaHNQTmstWUtDNUFiakE&gid=2");
-		    System.out.println(json.toString());
-		    //System.out.println(json.get("table"));
-		    
-		    JSONObject tableObject  = json.getJSONObject("table");
-		    JSONArray colsArray = tableObject.getJSONArray("cols");
-		    JSONArray dataCobject= tableObject.getJSONArray("rows");
-		    JSONObject dataObjectInArray = dataCobject.getJSONObject(0); // c
-		    JSONArray dataInArray = dataObjectInArray.getJSONArray("c");
-		    
-		    ArrayList<String> cabecera = new ArrayList<String>();
-		    
-		    notas = new ArrayList<Double>();
-		    
-		    for(int i=0; i<colsArray.length();i++ ){
-		    	
-		    	//Cabecera
-		    	
-		    	JSONObject colObjectInArray = colsArray.getJSONObject(i);
-		    	//String[] elementNames = JSONObject.getNames(colObjectInArray);
-		    	//System.out.printf("%d ELEMENTS IN CURRENT OBJECT:\n", elementNames.length);
-		    	String label = colObjectInArray.getString("label");
-		    	
-		    	cabecera.add(label);
-		    	
-		    	//System.out.println(label);
-		    	
-		    	//Notas
-		    	
-		    	JSONObject data = dataInArray.getJSONObject(i);
-		    	Double grade = (Double) data.getDouble("v");
-		    	
-		    	System.out.println(grade);
-		    	
-		    	notas.add(grade);
-		    }
-
+			
+			Instances data = new Instances(new BufferedReader(new
+					FileReader("/home/enrique/estudio/maestria unsa/pw/datamininghcapter7/grades.arff")));
+			data.setClassIndex(data.numAttributes() - 1);
+			LinearRegression model = new LinearRegression();
+			model.buildClassifier(data); //the last instance with missing
+			System.out.println(model);
+			//classify the last instance
+			Curso = data.lastInstance();
+			grade = model.classifyInstance(Curso);
+			System.out.println("Nota para ("+Curso+"): "+grade);
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+	
+	public String predecir(){	
+		try {
+			
+			Instances data = new Instances(new BufferedReader(new
+					FileReader("/home/enrique/estudio/maestria unsa/pw/datamininghcapter7/grades.arff")));
+			data.setClassIndex(data.numAttributes() - 1);
+			LinearRegression model = new LinearRegression();
+			model.buildClassifier(data); //the last instance with missing
+			System.out.println(model);
+			//classify the last instance
+			Curso = data.lastInstance();
+			grade = model.classifyInstance(Curso);
+			System.out.println("Nota para ("+Curso+"): "+grade);
+			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

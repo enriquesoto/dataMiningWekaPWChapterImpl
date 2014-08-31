@@ -22,6 +22,11 @@
 			<result name="success">/welcome.jsp</result>
 			<result name="error">/index.jsp</result>
 		</action>
+		<action name="predecirNotaAction" class="controllers.NotasController"
+			method="predecir">
+			<result name="success">/prediccionDataMining.jsp</result>
+			<result name="error">/index.jsp</result>
+		</action>
 		
 	</package>
 </struts>

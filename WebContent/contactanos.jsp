@@ -27,11 +27,8 @@
 		</div>
 	</div>
 	<div id="page" class="container">
-	Para el curso con las siguientes instancias
-	<s:property value="Curso" />
-	 se obtuvo una predicción : 
-	<s:property value="grade" />
-	
+				
+	</div>
 	        
 
 <div id="footer">

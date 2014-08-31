@@ -22,7 +22,7 @@
 <li><a href="http://localhost:8080/GradesTrackerServlet/">Home</a></li>
 <li><a href="http://localhost:8080/GradesTrackerServlet/about.jsp"">Respecto al Software</a></li>
 <!-- <li><a href="/grades/home/about">Links</a></li> -->
-<li><a href="http://localhost:8080/GradesTrackerServlet/contactanos.jsp">Contáctanos</a></li>
+<li><a href="http://localhost:8080/GradesTrackerFinal/contactanos.jsp">Contáctanos</a></li>
 			</ul>
 		</div>
 	</div>
